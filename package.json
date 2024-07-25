@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/pToum21/web-crawling-practice/issues"
   },
-  "homepage": "https://github.com/pToum21/web-crawling-practice#readme"
+  "homepage": "https://github.com/pToum21/web-crawling-practice#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
