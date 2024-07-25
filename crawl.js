@@ -1,3 +1,9 @@
+function getUrlsFromHTML(htmlBody, baseUrl) {
+    const urls = [];
+    return urls;
+}
+
+
 function noramlizeUrl(urlString) {
     // beacuse the url constructor already knows that urls do not care for upper case a nd lower case the capitals test is passed without any logic to do that 
     // ^ same goes for the http or https test
@@ -10,5 +16,6 @@ function noramlizeUrl(urlString) {
 }
 
 module.exports = {
-    noramlizeUrl
+    noramlizeUrl, 
+    getUrlsFromHTML
 };

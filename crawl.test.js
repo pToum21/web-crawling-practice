@@ -1,4 +1,4 @@
-const noramlizeUrl = require('./crawl').noramlizeUrl;
+const {noramlizeUrl, getUrlsFromHTML} = require('./crawl');
 const { test, expect } = require('@jest/globals');
 const exp = require('constants');
 
@@ -31,5 +31,21 @@ test('noramlizeUrl strip http', () => {
     const input = 'http://BLOG.boot.dev/path/'
     const actual = noramlizeUrl(input);
     const expected = 'blog.boot.dev/path'
+    expect(actual).toEqual(expected);
+});
+
+test('getUrlsFromHTML', () => {
+    const inputHTMLBody = `
+    <html>
+        <body>
+            <a href="https://blog.boot.dev/">
+                Boot.dev Blog
+            </a>
+        </body>
+    </html>
+    `
+    const inputBaseUrl = 'https://blog.boot.dev';
+    const actual = getUrlsFromHTML(inputBaseUrl, inputHTMLBody);
+    const expected = ["https://blog.boot.dev/"];
     expect(actual).toEqual(expected);
 });
