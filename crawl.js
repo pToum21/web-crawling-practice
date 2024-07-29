@@ -8,7 +8,14 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
     const linkElements = dom.window.document.querySelectorAll('a')
     for (const linkElement of linkElements) {
         console.log(linkElement.href);
-        urls.push(linkElement.href);
+        if (linkElement.href.slice(0, 1) === '/') {
+            // realtive path
+            urls.push(`${baseUrl}${linkElement.href}`);
+        } else {
+            // absolute path
+            urls.push(linkElement.href);
+        }
+
     }
     return urls;
 }

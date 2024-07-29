@@ -64,6 +64,6 @@ test('getUrlsFromHTML realtive', () => {
     `
     const inputBaseUrl = 'https://blog.boot.dev';
     const actual = getUrlsFromHTML(inputHTMLBody, inputBaseUrl);
-    const expected = ["https://blog.boot.dev/"];
+    const expected = ["https://blog.boot.dev/path/"];
     expect(actual).toEqual(expected);
 });
