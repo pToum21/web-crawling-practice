@@ -10,7 +10,14 @@ async function crawlPage(currentURL) {
 
         // check if the response is ok
         if (resp.status > 399) {
-            console.log(`error in fetch with status code: ${resp.status}`);
+            console.log(`error in fetch with status code: ${resp.status} on page: ${currentURL}`);
+            return;
+        }
+        // make sure we are getting html
+
+        const contentType = resp.headers.get('content-type');
+        if (!contentType.includes("text/html")) {
+            console.log(`Invalid content type, non html response: ${contentType}, on page: ${currentURL}`);
             return;
         }
 
