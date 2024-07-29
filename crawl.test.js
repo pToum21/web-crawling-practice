@@ -34,7 +34,23 @@ test('noramlizeUrl strip http', () => {
     expect(actual).toEqual(expected);
 });
 
-test('getUrlsFromHTML', () => {
+test('getUrlsFromHTML absolute', () => {
+    const inputHTMLBody = `
+    <html>
+        <body>
+            <a href="https://blog.boot.dev/">
+                Boot.dev Blog
+            </a>
+        </body>
+    </html>
+    `
+    const inputBaseUrl = 'https://blog.boot.dev';
+    const actual = getUrlsFromHTML(inputHTMLBody, inputBaseUrl);
+    const expected = ["https://blog.boot.dev/"];
+    expect(actual).toEqual(expected);
+});
+
+test('getUrlsFromHTML absolute', () => {
     const inputHTMLBody = `
     <html>
         <body>
