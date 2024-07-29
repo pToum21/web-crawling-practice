@@ -1,6 +1,15 @@
 // jsdom is a library that allows you to run a browser in a node environment that allows use to use dom methods in node and dom apis in node
 const { JSDOM } = require('jsdom');
 
+async function crawlPage(currentURL) {
+    console.log(`Crawling in progress: ${currentURL}`);
+
+    // fetch the page
+    const resp = await fetch(currentURL);
+
+    console.log(await resp.text());
+}
+
 function getUrlsFromHTML(htmlBody, baseUrl) {
     const urls = [];
     const dom = new JSDOM(htmlBody);
@@ -43,5 +52,6 @@ function noramlizeUrl(urlString) {
 
 module.exports = {
     noramlizeUrl,
-    getUrlsFromHTML
+    getUrlsFromHTML,
+    crawlPage
 };
