@@ -73,17 +73,17 @@ test('getUrlsFromHTML both a realtive and absolute', () => {
     const inputHTMLBody = `
     <html>
         <body>
-            <a href="/path/">
-                Boot.dev Blog
+            <a href="https://blog.boot.dev/path1/">
+                Boot.dev Blog path one
             </a>
-            <a href="https://blog.boot.dev/path/">
-                Boot.dev Blog
+            <a href="/path2/">
+                Boot.dev Blog path two
             </a>
         </body>
     </html>
     `
     const inputBaseUrl = 'https://blog.boot.dev';
     const actual = getUrlsFromHTML(inputHTMLBody, inputBaseUrl);
-    const expected = ["https://blog.boot.dev/path/"];
+    const expected = ["https://blog.boot.dev/path1/", "https://blog.boot.dev/path2/"];
     expect(actual).toEqual(expected);
 });
