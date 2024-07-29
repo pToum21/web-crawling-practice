@@ -4,10 +4,20 @@ const { JSDOM } = require('jsdom');
 async function crawlPage(currentURL) {
     console.log(`Crawling in progress: ${currentURL}`);
 
-    // fetch the page
-    const resp = await fetch(currentURL);
+    try {
+        // fetch the page
+        const resp = await fetch(currentURL);
 
-    console.log(await resp.text());
+        // check if the response is ok
+        if (resp.status > 399) {
+            console.log(`error in fetch with status code: ${resp.status}`);
+            return;
+        }
+
+        console.log(await resp.text());
+    } catch (err) {
+        console.log(`Failed to fetch page: ${err.message} on page: ${currentURL}`);
+    }
 }
 
 function getUrlsFromHTML(htmlBody, baseUrl) {
