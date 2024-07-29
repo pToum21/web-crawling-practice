@@ -34,27 +34,29 @@ test('noramlizeUrl strip http', () => {
     expect(actual).toEqual(expected);
 });
 
+// absoulte url test
 test('getUrlsFromHTML absolute', () => {
     const inputHTMLBody = `
     <html>
         <body>
-            <a href="https://blog.boot.dev/">
+            <a href="https://blog.boot.dev/path/">
                 Boot.dev Blog
             </a>
         </body>
     </html>
     `
-    const inputBaseUrl = 'https://blog.boot.dev';
+    const inputBaseUrl = 'https://blog.boot.dev/path/';
     const actual = getUrlsFromHTML(inputHTMLBody, inputBaseUrl);
-    const expected = ["https://blog.boot.dev/"];
+    const expected = ["https://blog.boot.dev/path/"];
     expect(actual).toEqual(expected);
 });
 
-test('getUrlsFromHTML absolute', () => {
+// create a url that doesnt include the protocol or the domain// it only inclubdes the path
+test('getUrlsFromHTML realtive', () => {
     const inputHTMLBody = `
     <html>
         <body>
-            <a href="https://blog.boot.dev/">
+            <a href="/path/">
                 Boot.dev Blog
             </a>
         </body>
