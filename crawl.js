@@ -10,12 +10,21 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
         console.log(linkElement.href);
         if (linkElement.href.slice(0, 1) === '/') {
             // realtive path
-            urls.push(`${baseUrl}${linkElement.href}`);
+            try {
+                const urlObj = new URL(`${baseUrl}${linkElement.href}`);
+                urls.push(urlObj.href);
+            } catch (err) {
+                console.log(`Invalid URL: ${err.message}`);
+            }
         } else {
             // absolute path
-            urls.push(linkElement.href);
+            try {
+                const urlObj = new URL(linkElement.href);
+                urls.push(urlObj.href);
+            } catch (err) {
+                console.log(`Invalid URL: ${err.message}`);
+            }
         }
-
     }
     return urls;
 }

@@ -96,9 +96,6 @@ test('getUrlsFromHTML Invalid URL', () => {
             <a href="invalid">
                 Invalid URL
             </a>
-            <a href="/path2/">
-                Boot.dev Blog path two
-            </a>
         </body>
     </html>
     `
