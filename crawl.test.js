@@ -67,3 +67,23 @@ test('getUrlsFromHTML realtive', () => {
     const expected = ["https://blog.boot.dev/path/"];
     expect(actual).toEqual(expected);
 });
+
+// a test that pulls out multiple urls
+test('getUrlsFromHTML both a realtive and absolute', () => {
+    const inputHTMLBody = `
+    <html>
+        <body>
+            <a href="/path/">
+                Boot.dev Blog
+            </a>
+            <a href="https://blog.boot.dev/path/">
+                Boot.dev Blog
+            </a>
+        </body>
+    </html>
+    `
+    const inputBaseUrl = 'https://blog.boot.dev';
+    const actual = getUrlsFromHTML(inputHTMLBody, inputBaseUrl);
+    const expected = ["https://blog.boot.dev/path/"];
+    expect(actual).toEqual(expected);
+});
