@@ -14,7 +14,7 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
                 const urlObj = new URL(`${baseUrl}${linkElement.href}`);
                 urls.push(urlObj.href);
             } catch (err) {
-                console.log(`Invalid URL: ${err.message}`);
+                console.log(`Invalid realtive URL: ${err.message}`);
             }
         } else {
             // absolute path
@@ -22,7 +22,7 @@ function getUrlsFromHTML(htmlBody, baseUrl) {
                 const urlObj = new URL(linkElement.href);
                 urls.push(urlObj.href);
             } catch (err) {
-                console.log(`Invalid URL: ${err.message}`);
+                console.log(`Invalid absolute URL: ${err.message}`);
             }
         }
     }
