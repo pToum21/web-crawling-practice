@@ -27,6 +27,7 @@ async function crawlPage(baseURl, currentURL, pages) {
     }
 }
 
+// find urls in the html body
 function getUrlsFromHTML(htmlBody, baseUrl) {
     const urls = [];
     const dom = new JSDOM(htmlBody);
