@@ -5,7 +5,6 @@ const { JSDOM } = require('jsdom');
 // the current url is the url that we are currently on and activley crawling
 // pages object is an object that keeps track of all the pages we have crawled and the pages we have yet to crawl so far
 async function crawlPage(baseURl, currentURL, pages) {
-    console.log(`Crawling in progress: ${currentURL}`);
 
     const baseURLObj = new URL(baseURl);
     const currentURLObj = new URL(currentURL);
@@ -19,6 +18,10 @@ async function crawlPage(baseURl, currentURL, pages) {
         return pages;
     }
 
+    pages[normalizedUrl] = 1;
+
+    console.log(`Crawling in progress: ${currentURL}`);
+
     try {
         // fetch the page
         const resp = await fetch(currentURL);
@@ -26,17 +29,26 @@ async function crawlPage(baseURl, currentURL, pages) {
         // check if the response is ok
         if (resp.status > 399) {
             console.log(`error in fetch with status code: ${resp.status} on page: ${currentURL}`);
-            return;
+            return pages;
         }
         // make sure we are getting html
 
         const contentType = resp.headers.get('content-type');
         if (!contentType.includes("text/html")) {
             console.log(`Invalid content type, non html response: ${contentType}, on page: ${currentURL}`);
-            return;
+            return pages;
         }
 
-        console.log(await resp.text());
+        const htmlBody = await resp.text();
+
+        // get all the urls from the html
+        const nextUrls = getUrlsFromHTML(htmlBody, currentURL);
+
+        for (const nextUrl of nextUrls) {
+            pages = await crawlPage(baseURl, nextUrl, pages);
+        }
+        return pages;
+
     } catch (err) {
         console.log(`Failed to fetch page: ${err.message} on page: ${currentURL}`);
     }
