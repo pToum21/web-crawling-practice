@@ -23,6 +23,7 @@ async function crawlPage(baseURl, currentURL, pages) {
     console.log(`Crawling in progress: ${currentURL}`);
 
     try {
+        // check if the url is already in the pages set
         // fetch the page
         const resp = await fetch(currentURL);
 
@@ -31,8 +32,8 @@ async function crawlPage(baseURl, currentURL, pages) {
             console.log(`error in fetch with status code: ${resp.status} on page: ${currentURL}`);
             return pages;
         }
-        // make sure we are getting html
 
+        // make sure we are getting html
         const contentType = resp.headers.get('content-type');
         if (!contentType.includes("text/html")) {
             console.log(`Invalid content type, non html response: ${contentType}, on page: ${currentURL}`);
@@ -54,6 +55,7 @@ async function crawlPage(baseURl, currentURL, pages) {
     }
 }
 
+// find urls in the html body
 function getUrlsFromHTML(htmlBody, baseUrl) {
     const urls = [];
     const dom = new JSDOM(htmlBody);
