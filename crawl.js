@@ -1,8 +1,9 @@
 // jsdom is a library that allows you to run a browser in a node environment that allows use to use dom methods in node and dom apis in node
 const { JSDOM } = require('jsdom');
 
-// the baseurl is the url that we are crawling, the starting point
-// the current url is the url that we are currently on
+// the baseurl is the url that we are crawling, the starting point/home page
+// the current url is the url that we are currently on and activley crawling
+// pages object is an object that keeps track of all the pages we have crawled and the pages we have yet to crawl so far
 async function crawlPage(baseURl, currentURL, pages) {
     console.log(`Crawling in progress: ${currentURL}`);
 
