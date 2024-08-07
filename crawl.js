@@ -7,6 +7,18 @@ const { JSDOM } = require('jsdom');
 async function crawlPage(baseURl, currentURL, pages) {
     console.log(`Crawling in progress: ${currentURL}`);
 
+    const baseURLObj = new URL(baseURl);
+    const currentURLObj = new URL(currentURL);
+    if (baseURLObj.hostname !== currentURLObj.hostname) {
+        return pages;
+    }
+
+    const normalizedUrl = noramlizeUrl(currentURL);
+    if (pages[normalizedUrl] > 0) {
+        pages[normalizedUrl]++;
+        return pages;
+    }
+
     try {
         // fetch the page
         const resp = await fetch(currentURL);
