@@ -54,7 +54,6 @@ async function crawlPage(baseURl, currentURL, pages) {
         console.log(`Failed to fetch page: ${err.message} on page: ${currentURL}`);
     }
 }
-
 // find urls in the html body
 function getUrlsFromHTML(htmlBody, baseUrl) {
     const urls = [];
