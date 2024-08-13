@@ -1,1 +1,3 @@
 * building a web crawler 
+
+need to fix quieries 
