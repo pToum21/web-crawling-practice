@@ -1,3 +1,5 @@
 * building a web crawler 
 
 need to fix quieries 
+
+maybe added more comments to better understand considering the new job is a RAG system
